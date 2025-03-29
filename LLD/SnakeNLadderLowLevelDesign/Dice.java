@@ -8,7 +8,7 @@ public class Dice {
     int max;
 
     public Dice(int count){
-        this.count = count;
+        this.count = 1;
         min = 1;
         max = 6;
     }
@@ -19,6 +19,7 @@ public class Dice {
         int noOfDice = count;
         while(noOfDice-- > 0){
             int rollResult = (ThreadLocalRandom.current().nextInt(min, max + 1));
+            System.out.println("Dice rolled: " + rollResult);
             finalResult += rollResult;
         }
         return finalResult;
