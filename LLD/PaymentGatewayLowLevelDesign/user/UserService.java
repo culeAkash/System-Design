@@ -2,6 +2,7 @@ package LLD.PaymentGatewayLowLevelDesign.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class UserService {
@@ -24,9 +25,11 @@ public class UserService {
         return userDTO;
     }
 
-    public void addUser(UserDTO userDto) {
+    public UserDTO addUser(UserDTO userDto) {
+        userDto.setUserId(new Random().nextInt(100-10)+10);
         User user = convertUserDTOToUser(userDto);
         users.add(user);
+        return convertUserToUserDTO(user);
     }
 
     public List<User> getUsers() {

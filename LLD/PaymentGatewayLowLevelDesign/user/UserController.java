@@ -7,8 +7,8 @@ public class UserController {
         userService = new UserService();
     }
 
-    public void addUser(UserDTO userDto) {
-        userService.addUser(userDto);
+    public UserDTO addUser(UserDTO userDto) {
+        return userService.addUser(userDto);
     }
 
     public UserDTO getUser(String email) {
