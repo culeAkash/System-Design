@@ -1,17 +1,15 @@
-package LLD.HashMapImplementation;
+package HashMapImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyHashMap<K,V> {
     private int capacity; // number of buckets possible
-    private final int INITIAL_CAPACITY = 16;
-    private final float LOAD_FACTOR = 0.75f;
     private int size; // number of elements in map
     private List<MapEntry<K,V>> buckets;
 
     public MyHashMap() {
-        this.capacity = INITIAL_CAPACITY;
+        this.capacity = 16;
         this.size = 0;
         this.buckets = new ArrayList<>();
         for(int i=0;i<capacity;i++){
@@ -63,7 +61,7 @@ public class MyHashMap<K,V> {
         MapEntry<K,V> head = buckets.get(index);
 
         if(head==null){
-            head = new MapEntry<>(key,value);
+            head = new MapEntry<>(key, value);
             buckets.set(index,head);
         }
         else{
@@ -77,12 +75,13 @@ public class MyHashMap<K,V> {
                 prevNode = current;
                 current = current.next;
             }
-            MapEntry<K,V> entry = new MapEntry<>(key,value);    
+            MapEntry<K,V> entry = new MapEntry<>(key, value);
             prevNode.next = entry;
             entry.prev = prevNode;
         }
         this.size++;
-        if((float)(size/capacity)>LOAD_FACTOR){
+        float LOAD_FACTOR = 0.75f;
+        if((float)(size/capacity)> LOAD_FACTOR){
             rehash();
         }
     }
@@ -93,8 +92,7 @@ public class MyHashMap<K,V> {
     public void remove(K key){
         int index = getBucketIndex(key);
 
-        MapEntry<K,V> head = buckets.get(index);
-        MapEntry<K,V> current = head;
+        MapEntry<K,V> current = buckets.get(index);
 
         while(current!=null){
             if(current.key.equals(key)){
@@ -119,7 +117,7 @@ public class MyHashMap<K,V> {
         return (key.hashCode() % this.capacity);
     }
 
-    private class MapEntry<K,V>{
+    private static class MapEntry<K,V>{
         K key;
         V value;
         MapEntry<K,V> next;
