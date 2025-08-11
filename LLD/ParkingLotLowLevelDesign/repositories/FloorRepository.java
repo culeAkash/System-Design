@@ -45,4 +45,10 @@ public class FloorRepository {
     }
 
 
+    // get current max floor
+    public Integer getMaxFloor(){
+        return floorNumberToId.keySet().stream().max(Integer::compare).orElse(-1);
+    }
+
+
 }

@@ -14,17 +14,17 @@ public class Payment {
     }
 
     public enum PaymentGateway {
-        STRIPE, PAYPAL, CASH
+        STRIPE, RAZORPAY, CASH
     }
 
     public Payment() {
     }
 
-    public Payment(UUID id, UUID ticketId, Double amount, PaymentStatus status, PaymentGateway gateway) {
-        this.id = id;
+    public Payment(UUID ticketId, Double amount, PaymentGateway gateway) {
+        this.id = UUID.randomUUID();
         this.ticketId = ticketId;
         this.amount = amount;
-        this.status = status;
+        this.status = PaymentStatus.PENDING;
         this.gateway = gateway;
     }
 
@@ -68,12 +68,18 @@ public class Payment {
         this.gateway = gateway;
     }
 
+    public void markAsPaid() {
+        this.status = PaymentStatus.SUCCESS;
+    }
+
+    public void markAsFailed() {
+        this.status = PaymentStatus.FAILED;
+    }
+
     @Override
     public String toString() {
         return "Payment [id=" + id + ", ticketId=" + ticketId + ", amount=" + amount + ", status=" + status
                 + ", gateway=" + gateway + "]";
     }
 
-    
-    
 }

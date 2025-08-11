@@ -7,7 +7,7 @@ import domain.Vehicle.VehicleType;
 public class PricingRule {
     private UUID id;
     private VehicleType vehicleType;
-    private Double flatRate;
+    private Double dailyRate;
     private Double hourlyRate;
 
     public PricingRule() {
@@ -16,7 +16,7 @@ public class PricingRule {
     public PricingRule(UUID id, VehicleType vehicleType, Double flatRate, Double hourlyRate) {
         this.id = id;
         this.vehicleType = vehicleType;
-        this.flatRate = flatRate;
+        this.dailyRate = flatRate;
         this.hourlyRate = hourlyRate;
     }
 
@@ -36,12 +36,12 @@ public class PricingRule {
         this.vehicleType = vehicleType;
     }
 
-    public Double getFlatRate() {
-        return flatRate;
+    public Double getDailyRate() {
+        return dailyRate;
     }
 
-    public void setFlatRate(Double flatRate) {
-        this.flatRate = flatRate;
+    public void setDailyRate(Double flatRate) {
+        this.dailyRate = flatRate;
     }
 
     public Double getHourlyRate() {
@@ -54,7 +54,7 @@ public class PricingRule {
 
     @Override
     public String toString() {
-        return "PricingRule [id=" + id + ", vehicleType=" + vehicleType + ", flatRate=" + flatRate + ", hourlyRate="
+        return "PricingRule [id=" + id + ", vehicleType=" + vehicleType + ", dailyRate=" + dailyRate + ", hourlyRate="
                 + hourlyRate + "]";
     }
 

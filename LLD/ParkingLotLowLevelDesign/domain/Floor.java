@@ -44,6 +44,10 @@ public class Floor {
         this.parkingSlots = parkingSlots;
     }
 
+    public void addParkingSlot(ParkingSlot parkingSlot){
+        this.parkingSlots.add(parkingSlot);
+    }
+
 
     // ToString method
     @Override

@@ -15,12 +15,12 @@ public class Receipt {
     public Receipt() {
     }
 
-    public Receipt(UUID id, UUID paymentId, LocalDateTime exitTime, Double amountPaid, PaymentStatus paymentStatus) {
-        this.id = id;
+    public Receipt(UUID paymentId, Double amountPaid) {
+        this.id = UUID.randomUUID();
         this.paymentId = paymentId;
-        this.exitTime = exitTime;
+        this.exitTime = LocalDateTime.now();
         this.amountPaid = amountPaid;
-        this.paymentStatus = paymentStatus;
+        this.paymentStatus = PaymentStatus.PENDING;
     }
 
     public UUID getId() {
@@ -63,11 +63,18 @@ public class Receipt {
         this.paymentStatus = paymentStatus;
     }
 
+    public void markAsPaid() {
+        this.paymentStatus = PaymentStatus.SUCCESS;
+    }
+
+    public Double getTotalFee() {
+        return amountPaid;
+    }
+
     @Override
     public String toString() {
         return "Receipt [id=" + id + ", paymentId=" + paymentId + ", exitTime=" + exitTime + ", amountPaid="
                 + amountPaid + ", paymentStatus=" + paymentStatus + "]";
     }
 
-    
 }

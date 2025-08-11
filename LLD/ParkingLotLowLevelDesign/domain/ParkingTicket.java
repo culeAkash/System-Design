@@ -1,11 +1,15 @@
 package domain;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
+
+import domain.Vehicle.VehicleType;
 
 public class ParkingTicket {
     private UUID id;
     private UUID vehicleId;
+    private VehicleType vehicleType;
     private UUID slotId;
     private LocalDateTime entryTime;
     private Boolean isActive;
@@ -13,12 +17,13 @@ public class ParkingTicket {
     public ParkingTicket() {
     }
 
-    public ParkingTicket(UUID id, UUID vehicleId, UUID slotId, LocalDateTime entryTime, Boolean isActive) {
+    public ParkingTicket(UUID id, UUID vehicleId, UUID slotId, VehicleType vehicleType) {
         this.id = id;
         this.vehicleId = vehicleId;
         this.slotId = slotId;
-        this.entryTime = entryTime;
-        this.isActive = isActive;
+        this.entryTime = LocalDateTime.now();
+        this.isActive = false;
+        this.vehicleType = vehicleType;
     }
 
     public UUID getId() {
@@ -61,24 +66,34 @@ public class ParkingTicket {
         this.isActive = isActive;
     }
 
-    public boolean isActive(){
+    public boolean isActive() {
         return isActive;
     }
 
-    public void deactivateTicket(){
+    public void deactivateTicket() {
         isActive = false;
+    }
+
+    public Long getTimeInMillis() {
+        return entryTime
+                .atZone(ZoneId.systemDefault())
+                .toInstant()
+                .toEpochMilli();
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     @Override
     public String toString() {
-        return "ParkingTicket{" +
-                "id=" + id +
-                ", vehicleId=" + vehicleId +
-                ", slotId=" + slotId +
-                ", entryTime=" + entryTime +
-                ", isActive=" + isActive +
-                '}';
+        return "ParkingTicket [id=" + id + ", vehicleId=" + vehicleId + ", slotId=" + slotId + ", entryTime="
+                + entryTime
+                + ", isActive=" + isActive + "]";
     }
 
-    
 }

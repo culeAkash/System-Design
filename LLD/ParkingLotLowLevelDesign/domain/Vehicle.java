@@ -10,7 +10,6 @@ public class Vehicle {
     public enum VehicleType{
         CAR,
         MOTORCYCLE,
-        TRUCK,
         EV
     }
 
